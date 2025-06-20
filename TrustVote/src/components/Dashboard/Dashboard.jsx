@@ -1,5 +1,7 @@
 import React from 'react';
 import StatsCard from './StatsCard';
+import RecentElections from './RecentElections';
+import { getElectionStatus } from '../../utils/electionUtils';
 import { Vote, Users, Clock, BarChart3 } from 'lucide-react';
 
 const Dashboard = ({ elections }) => {
@@ -21,7 +23,7 @@ const Dashboard = ({ elections }) => {
         <StatsCard
           icon={Clock}
           title="Active Elections"
-          value={elections.filter(e => e.status === 'active').length}
+          value={elections.filter(e => getElectionStatus(e) === 'active').length}
           color="text-orange-600"
         />
         <StatsCard
@@ -31,6 +33,7 @@ const Dashboard = ({ elections }) => {
           color="text-purple-600"
         />
       </div>
+      <RecentElections elections={elections} />
     </div>
   );
 };
