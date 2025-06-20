@@ -1,4 +1,6 @@
 import React from 'react';
+import StatusBadge from '../Common/StatusBadge';
+import { getElectionStatus } from '../../utils/electionUtils';
 
 const RecentElections = ({ elections }) => {
   return (
@@ -15,8 +17,8 @@ const RecentElections = ({ elections }) => {
                 <p className="text-sm text-gray-600">{election.description}</p>
               </div>
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">Status</span>
-                <span className="text-sm text-gray-600">Votes</span>
+                <StatusBadge status={getElectionStatus(election)} />
+                <span className="text-sm text-gray-600">{election.totalVotes} votes</span>
               </div>
             </div>
           ))}
