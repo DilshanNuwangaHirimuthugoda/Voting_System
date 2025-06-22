@@ -1,3 +1,21 @@
+
+const createElection = () => {
+  if (!newElection.title || !newElection.startDate || !newElection.endDate) return;
+
+  const pin = generatePin();
+  const election = {
+    id: Date.now(),
+    ...newElection,
+    pin,
+    qrCode: generateQR(pin),
+    candidates: [],
+    totalVotes: 0,
+    status: new Date(newElection.startDate) > new Date() ? 'upcoming' : 'active'
+  };
+
+  setElections([...elections, election]);
+  setNewElection({ title: '', description: '', startDate: '', endDate: '', maxVoters: 100 });
+};
 return (
   <div className="bg-white rounded-lg shadow p-6">
     <h2 className="text-lg font-semibold text-gray-900 mb-4">Create New Election</h2>
@@ -14,3 +32,4 @@ return (
     </button>
   </div>
 );
+
